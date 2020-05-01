@@ -1,22 +1,18 @@
 language: generic
 sudo: required
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -t elzilch0/docker_react -f Dockerfile.dev .
-
+- docker build -t elzilch0/docker_react -f Dockerfile.dev .
 script:
-  - docker run -e CI=true elzilch0/docker_react npm run test
-
+- docker run -e CI=true elzilch0/docker_react npm run test
 deploy:
   provider: elasticbeanstalk
-  region: "us-east-1"
-  app: "docker_react"
-  environment: "DockerReact-env"
-  bucket_name: "elasticbeanstalk-us-east-1-661933406886"
-  bucket_path: "docker_react"
+  access_key_id: AKIAZUHSOHKTFKSQD7WZ
+  secret_access_key:
+    secure: lMawt5GKVSAP33IBmvRms69h6GFfvejPX9soDzEUN25VXn3VHx9tk30VqV+QXzH03v/dDh8ATrvKzRp+bPyt2Eovq324K+h9e/E1xLALXgU3qn0+BAaxaFnHN+Kokov0BS3tqonISgbCA8eASH5gT025T2jToFuAcRDgfaGKoFjxTMyj8lObk5uV10RdoR3n7H3mNZWK5zhGavXA6CfIsiyJacibSyOjMlXDV8V1ZFynuvLBgmMxotKtwHTlnNsmMlcmyck3nrM1kqT4YSSoT8Z3RRjW7FDowIU/JzQu3V8MjqM8qJBzSQJPY/EYnKQBECDWsNP8EVGQIW2f8xSR72fPU0ok6Hj2ND+XFChF5aQgrp7Dd+PI31A76yGT3y+ojds0l+msmEuid9DUQutaAOOzP19Oa42tjwoTI41x8xnNFvEdNu31g3i1X9FBmVIF8kdcW+Tmkzyr8FLrZf/t5aroiOz0i5kJZ9Z8ajePxW4qBdeAjmqOD4M4erWK6Ux/n+4oszGpXxQsrBCIlBpFflGpAKjyPJtEMSwK2hiD2fylyQZohAKww5WA2DVii+jiZPNfa5EdTcFu5MQw+X4tLpq6SbNVdNoAO9hK630JrbzJUna+kMf9srnA1c5zDeVkLiurHf1bQpGJYRx1sVpDp13/csWxPwlnqqINFNmeECA=
+  region: us-east-1
+  app: docker_react
+  env: DockerReact-env
   on:
     branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
