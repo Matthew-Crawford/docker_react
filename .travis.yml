@@ -7,6 +7,7 @@ before_install:
 script:
 - docker run -e CI=true elzilch0/docker_react npm run test
 deploy:
+  edge: true
   provider: elasticbeanstalk
   access_key_id: AKIAZUHSOHKTFKSQD7WZ
   secret_access_key:
